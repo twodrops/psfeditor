@@ -22,8 +22,8 @@ public class SVNProvider extends Provider {
   private static final int PROJECT_INDEX = 2;
 
   /**
-   * @param projectSet
-   * @param id
+   * @param projectSet Project Set model
+   * @param id id of team provider
    */
   public SVNProvider(final IProjectSet projectSet, final String id) {
     super(projectSet, id);

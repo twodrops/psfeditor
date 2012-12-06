@@ -37,6 +37,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipselabs.team.ui.psf.editor.ProjectSetEditorMessages;
 
 /**
  * This is a sample new wizard. Its role is to create a new file resource in the provided container. If the container
@@ -98,7 +99,7 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
     }
     catch (InvocationTargetException e) {
       Throwable realException = e.getTargetException();
-      MessageDialog.openError(getShell(), "Error", realException.getMessage());
+      MessageDialog.openError(getShell(), ProjectSetEditorMessages.ProjectSetImportWizard_Wizard_error, realException.getMessage());
       return false;
     }
     return true;
@@ -112,11 +113,11 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
   private void doFinish(final String containerName, final String fileName, final IProgressMonitor monitor)
       throws CoreException {
     // create a sample file
-    monitor.beginTask("Creating " + fileName, 2);
+    monitor.beginTask(ProjectSetEditorMessages.ProjectSetImportWizard_Create_info + fileName, 2);
     IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
     IResource resource = root.findMember(new Path(containerName));
     if (!resource.exists() || !(resource instanceof IContainer)) {
-      throwCoreException("Container \"" + containerName + "\" does not exist.");
+      throwCoreException(ProjectSetEditorMessages.ProjectSetImportWizard_Container_error_01 + containerName + ProjectSetEditorMessages.ProjectSetImportWizard_Container_error_02);
     }
     IContainer container = (IContainer) resource;
     final IFile file = container.getFile(new Path(fileName));
@@ -132,7 +133,7 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
     }
     catch (IOException e) {}
     monitor.worked(1);
-    monitor.setTaskName("Opening file for editing...");
+    monitor.setTaskName(ProjectSetEditorMessages.ProjectSetImportWizard_Editor_Open_info);
     getShell().getDisplay().asyncExec(new Runnable() {
 
       public void run() {
@@ -151,12 +152,12 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
    */
 
   private InputStream openContentStream() {
-    String contents = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<psf version=\"2.0\">\n</psf>";
+    String contents = ProjectSetEditorMessages.ProjectSetImportWizard_5;
     return new ByteArrayInputStream(contents.getBytes());
   }
 
   private void throwCoreException(final String message) throws CoreException {
-    IStatus status = new Status(IStatus.ERROR, "org.eclipselabs.team.ui.psf.editor", IStatus.OK, message, null);
+    IStatus status = new Status(IStatus.ERROR, ProjectSetEditorMessages.ProjectSetImportWizard_6, IStatus.OK, message, null);
     throw new CoreException(status);
   }
 

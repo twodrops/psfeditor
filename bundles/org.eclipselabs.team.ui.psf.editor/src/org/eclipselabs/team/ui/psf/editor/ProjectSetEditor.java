@@ -47,7 +47,8 @@ import org.eclipselabs.team.ui.psf.editor.writer.ProjectSetWriter;
 
 /**
  * Editor for Project Set (*.psf) files. Uses {@link IProjectSet} model to load, edit and save project set file. A
- * project viewer lists the projects available in Project Set.
+ * project viewer lists the projects available in Project Set. The editor also allows importing of files within the
+ * project set
  * 
  * @author Nirmal Sasidharan
  */
@@ -68,7 +69,7 @@ public class ProjectSetEditor extends FormEditor {
       addPage(new ProjectSetPage(this));
     }
     catch (PartInitException e) {
-      showError("Error creating Form page", new ProjectSetException(e));
+      showError(ProjectSetEditorMessages.ProjectSetEditor_FormPage_Create_error, new ProjectSetException(e));
     }
 
   }
@@ -104,7 +105,7 @@ public class ProjectSetEditor extends FormEditor {
       this.projectSetInputHandler.saveProjectSet(((IFileEditorInput) getEditorInput()).getFile());
     }
     catch (ProjectSetException e) {
-      showError("Unable to save", e);
+      showError(ProjectSetEditorMessages.ProjectSetEditor_Save_error, e);
     }
 
 
@@ -117,11 +118,9 @@ public class ProjectSetEditor extends FormEditor {
   @Override
   public void doSaveAs() {
 
-    IProjectSet projectSet = getProjectSet();
-
     SaveAsDialog dialog = new SaveAsDialog(getSite().getShell());
     dialog.create();
-    dialog.setMessage("Save projectset to another location.", IMessageProvider.NONE);
+    dialog.setMessage(ProjectSetEditorMessages.ProjectSetEditor_Save_MessageBox_message, IMessageProvider.NONE);
     dialog.open();
 
     IPath path = dialog.getResult();
@@ -140,7 +139,7 @@ public class ProjectSetEditor extends FormEditor {
       this.projectSetInputHandler.saveProjectSet(file);
     }
     catch (ProjectSetException e) {
-      showError("Unable to save", e);
+      showError(ProjectSetEditorMessages.ProjectSetEditor_Save_error, e);
     }
 
     // Opening the newly saved file
@@ -154,7 +153,7 @@ public class ProjectSetEditor extends FormEditor {
   @Override
   public void init(final IEditorSite site, final IEditorInput editorInput) throws PartInitException {
     if (!(editorInput instanceof IFileEditorInput) && !(editorInput instanceof IURIEditorInput)) {
-      throw new PartInitException("Invalid Input: Must be IFileEditorInput or IURIEditorInput");
+      throw new PartInitException(ProjectSetEditorMessages.ProjectSetEditor_Input_error);
     }
     super.init(site, editorInput);
   }
@@ -194,7 +193,8 @@ public class ProjectSetEditor extends FormEditor {
     display.asyncExec(new Runnable() {
 
       public void run() {
-        MessageDialog.openError(getSite().getShell(), "ProjectSet Editor", exception.getMessage());
+        MessageDialog.openError(getSite().getShell(), ProjectSetEditorMessages.ProjectSetEditor_Error_title,
+            exception.getMessage());
       }
     });
   }
@@ -279,7 +279,7 @@ public class ProjectSetEditor extends FormEditor {
           editorDirtyStateChanged();
         }
         catch (ProjectSetException e) {
-          showError("Error opening ProjectSet file", e);
+          showError(ProjectSetEditorMessages.ProjectSetEditor_Load_error, e);
           close(false);
         }
       }
@@ -313,6 +313,7 @@ public class ProjectSetEditor extends FormEditor {
      * org.eclipse.core.resources.IResourceChangeListener#resourceChanged(org.eclipse.core.resources.IResourceChangeEvent
      * )
      */
+    @Override
     public void resourceChanged(final IResourceChangeEvent event) {
       if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
         IResourceDelta delta = event.getDelta().findMember(this.projectSetFileInWorkspace.getFullPath());

@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 
 package org.eclipselabs.team.ui.psf.editor;
@@ -30,17 +25,16 @@ import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
 import org.eclipselabs.team.ui.psf.editor.importer.ProjectImporter;
 
 
-
 /**
  * @author Nirmal Sasidharan
  */
 public class ProjectSetPage extends FormPage {
 
   /**
-   * @param editor
+   * @param editor editor instance
    */
   public ProjectSetPage(final FormEditor editor) {
-    super(editor, "projectSet", null);
+    super(editor, ProjectSetEditorMessages.ProjectSetPage_Page_id, null);
   }
 
   /**
@@ -53,7 +47,7 @@ public class ProjectSetPage extends FormPage {
 
     final FormToolkit toolkit = managedForm.getToolkit();
     ScrolledForm form = managedForm.getForm();
-    form.setText("Project Set");
+    form.setText(ProjectSetEditorMessages.ProjectSetPage_title);
     toolkit.decorateFormHeading(form.getForm());
 
     fillbody(managedForm, toolkit, form);
@@ -76,7 +70,7 @@ public class ProjectSetPage extends FormPage {
           @Override
           protected Control createControl(final Composite parent) {
             final ImageHyperlink hyperlink = new ImageHyperlink(parent, SWT.NONE);
-            hyperlink.setText("Import ProjectSet");
+            hyperlink.setText(ProjectSetEditorMessages.ProjectSetPage_Import_link);
             hyperlink.setUnderlined(true);
             hyperlink.setForeground(toolkit.getHyperlinkGroup().getForeground());
             hyperlink.addHyperlinkListener(new IHyperlinkListener() {
@@ -128,7 +122,7 @@ public class ProjectSetPage extends FormPage {
   }
 
   /**
-   * @return
+   * @return The project set model model backing this editor
    */
   public IProjectSet getProjectSet() {
     return ((ProjectSetEditor) getEditor()).getProjectSet();

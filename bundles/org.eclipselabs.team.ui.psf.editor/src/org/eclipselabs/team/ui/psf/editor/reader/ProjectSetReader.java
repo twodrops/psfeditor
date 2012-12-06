@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor.reader;
 
@@ -31,7 +26,6 @@ import org.eclipselabs.team.ui.psf.editor.core.IWorkingSet;
 import org.eclipselabs.team.ui.psf.editor.core.IWorkingSetItem;
 import org.eclipselabs.team.ui.psf.editor.core.ProjectSetFactory;
 import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
-
 
 
 /**
@@ -103,8 +97,9 @@ public class ProjectSetReader {
    * 
    * @param xmlMemento XML Memento
    * @return Project Set root
+   * @throws ProjectSetException
    */
-  protected IProjectSet loadMementoIntoProjectSet(final XMLMemento xmlMemento) {
+  protected IProjectSet loadMementoIntoProjectSet(final XMLMemento xmlMemento) throws ProjectSetException {
 
     Assert.isNotNull(xmlMemento);
 
@@ -132,8 +127,10 @@ public class ProjectSetReader {
   /**
    * @param xmlMemento
    * @param projectSet
+   * @throws ProjectSetException
    */
-  protected void createProjectsFromMemento(final XMLMemento xmlMemento, final IProjectSet projectSet) {
+  protected void createProjectsFromMemento(final XMLMemento xmlMemento, final IProjectSet projectSet)
+      throws ProjectSetException {
     // load providers and projects
     IMemento[] providersMemento = xmlMemento.getChildren("provider"); //$NON-NLS-1$
 

@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 
 package org.eclipselabs.team.ui.psf.editor;
@@ -20,7 +15,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -49,8 +43,6 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipselabs.team.ui.psf.editor.change.service.IContentChangedListener;
 import org.eclipselabs.team.ui.psf.editor.change.service.IContentDelta;
 import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
-import org.eclipselabs.team.ui.psf.editor.core.IProvider;
-import org.eclipselabs.team.ui.psf.editor.core.Project;
 import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
 import org.eclipselabs.team.ui.psf.editor.reader.ProjectSetHandler;
 
@@ -58,340 +50,314 @@ import org.eclipselabs.team.ui.psf.editor.reader.ProjectSetHandler;
  * Section for adding and removing projects in Project Set Editor
  * 
  * @see ProjectSetPage
- * @see ProjectSetException
+ * @see ProjectSetEditor
  * @author Nirmal Sasidharan
  */
-public class ProjectSection extends SectionPart implements
-		IContentChangedListener {
+public class ProjectSection extends SectionPart implements IContentChangedListener {
 
-	/**
-	 * The editor instance
-	 */
-	private final ProjectSetEditor projectSetEditor;
+  /**
+   * The editor instance
+   */
+  private final ProjectSetEditor projectSetEditor;
 
-	/**
-	 * Table Viewer to display projects in Project Set
-	 */
-	private TableViewer projectsViewer;
+  /**
+   * Table Viewer to display projects in Project Set
+   */
+  private TableViewer projectsViewer;
 
-	/**
-	 * Button to add new projects to Project Set
-	 */
-	private Button addButton;
+  /**
+   * Button to add new projects to Project Set
+   */
+  private Button addButton;
 
-	/**
-	 * Button to remove new projects from Project Set
-	 */
-	private Button removeButton;
+  /**
+   * Button to remove new projects from Project Set
+   */
+  private Button removeButton;
 
-	/**
-	 * Content Provider for Project Set
-	 */
-	class ProjectSetContentProvider implements IStructuredContentProvider {
+  /**
+   * Content Provider for Project Set
+   */
+  class ProjectSetContentProvider implements IStructuredContentProvider {
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void dispose() {
-			// Do nothing
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void dispose() {
+      // Do nothing
+    }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public void inputChanged(final Viewer viewer, final Object oldInput,
-				final Object newInput) {
-			// Do nothing
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void inputChanged(final Viewer viewer, final Object oldInput, final Object newInput) {
+      // Do nothing
+    }
 
-		/**
-		 * {@inheritDoc}
-		 */
-		@Override
-		public Object[] getElements(final Object inputElement) {
-			Assert.isTrue((inputElement instanceof IProjectSet),
-					PSFEMessages.ProjectSection_ContentProvider_assertion);
-			return ((IProjectSet) inputElement).getProjects().toArray();
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object[] getElements(final Object inputElement) {
+      Assert.isTrue((inputElement instanceof IProjectSet),
+          ProjectSetEditorMessages.ProjectSection_ContentProvider_assertion);
+      return ((IProjectSet) inputElement).getProjects().toArray();
+    }
+  }
 
-	/**
-	 * @param page
-	 *            {@link ProjectSetPage}
-	 * @param parent
-	 *            {@link ProjectSetPage} body
-	 */
-	public ProjectSection(final FormPage page, final Composite parent) {
+  /**
+   * @param page {@link ProjectSetPage}
+   * @param parent {@link ProjectSetPage} body
+   */
+  public ProjectSection(final FormPage page, final Composite parent) {
 
-		super(parent, page.getManagedForm().getToolkit(), Section.DESCRIPTION
-				| ExpandableComposite.TITLE_BAR);
-		this.projectSetEditor = (ProjectSetEditor) page.getEditor();
+    super(parent, page.getManagedForm().getToolkit(), Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+    this.projectSetEditor = (ProjectSetEditor) page.getEditor();
 
-		ProjectSetHandler.INSTANCE.addContentChangedListener(this);
+    ProjectSetHandler.INSTANCE.addContentChangedListener(this);
 
-		createClient(getSection(), page.getEditor().getToolkit());
+    createClient(getSection(), page.getEditor().getToolkit());
 
-		setInput();
-	}
+    setInput();
+  }
 
-	/**
-	 * @return The project set model model backing this editor
-	 */
-	private IProjectSet getProjectSet() {
-		return this.projectSetEditor.getProjectSet();
+  /**
+   * @return The project set model model backing this editor
+   */
+  private IProjectSet getProjectSet() {
+    return this.projectSetEditor.getProjectSet();
 
-	}
+  }
 
-	/**
-	 * Sets input to projectsViewer
-	 */
-	protected void setInput() {
-		this.projectsViewer.setInput(getProjectSet());
-	}
+  /**
+   * Sets input to projectsViewer
+   */
+  protected void setInput() {
+    this.projectsViewer.setInput(getProjectSet());
+  }
 
-	/**
-	 * Creates the UI for this section.
-	 * 
-	 * @param section
-	 *            section the UI is being added to
-	 * @param toolkit
-	 *            form toolkit used to create the widgets
-	 */
-	protected void createClient(final Section section, final FormToolkit toolkit) {
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void refresh() {
+    setInput();
+    super.refresh();
+  }
 
-		Composite client = toolkit.createComposite(section);
-		GridLayoutFactory.fillDefaults().extendedMargins(2, 2, 2, 2)
-				.numColumns(2).applyTo(client);
-		section.setText(PSFEMessages.ProjectSection_title);
-		section.setDescription(PSFEMessages.ProjectSection_description);
+  /**
+   * Creates the UI for this section.
+   * 
+   * @param section section the UI is being added to
+   * @param toolkit form toolkit used to create the widgets
+   */
+  protected void createClient(final Section section, final FormToolkit toolkit) {
 
-		createProjectsViewer(toolkit, client);
+    Composite client = toolkit.createComposite(section);
+    GridLayoutFactory.fillDefaults().extendedMargins(2, 2, 2, 2).numColumns(2).applyTo(client);
+    section.setText(ProjectSetEditorMessages.ProjectSection_title);
+    section.setDescription(ProjectSetEditorMessages.ProjectSection_description);
 
-		createButtons(toolkit, client);
+    createProjectsViewer(toolkit, client);
 
-		toolkit.paintBordersFor(client);
-		section.setClient(client);
-	}
+    createButtons(toolkit, client);
 
-	/**
-	 * @param toolkit
-	 *            toolkit form toolkit used to create the widgets
-	 * @param parent
-	 *            client composite
-	 * @return created ProjectsViewer
-	 */
-	protected TableViewer createProjectsViewer(final FormToolkit toolkit,
-			final Composite parent) {
-		this.projectsViewer = new TableViewer(toolkit.createTable(parent,
-				SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI));
-		GridDataFactory.fillDefaults().grab(true, true).hint(SWT.NONE, 0)
-				.applyTo(this.projectsViewer.getControl());
-		this.projectsViewer.setContentProvider(new ProjectSetContentProvider());
-		this.projectsViewer.setLabelProvider(new WorkbenchLabelProvider());
-		this.projectsViewer.getTable().setData(FormToolkit.KEY_DRAW_BORDER,
-				FormToolkit.TREE_BORDER);
+    toolkit.paintBordersFor(client);
+    section.setClient(client);
+  }
 
-		this.projectsViewer.getTable().addKeyListener(new KeyAdapter() {
+  /**
+   * Creates Projects Viewers which displays projects within PSF file
+   * 
+   * @param toolkit toolkit form toolkit used to create the widgets
+   * @param parent client composite
+   * @return created ProjectsViewer
+   */
+  protected TableViewer createProjectsViewer(final FormToolkit toolkit, final Composite parent) {
+    this.projectsViewer = new TableViewer(toolkit.createTable(parent, SWT.V_SCROLL | SWT.H_SCROLL | SWT.MULTI));
+    GridDataFactory.fillDefaults().grab(true, true).hint(SWT.NONE, 0).applyTo(this.projectsViewer.getControl());
+    this.projectsViewer.setContentProvider(new ProjectSetContentProvider());
+    this.projectsViewer.setLabelProvider(new WorkbenchLabelProvider());
+    this.projectsViewer.getTable().setData(FormToolkit.KEY_DRAW_BORDER, FormToolkit.TREE_BORDER);
 
-			@Override
-			public void keyPressed(final KeyEvent e) {
-				if ((e.keyCode == SWT.DEL)
-						&& ProjectSection.this.removeButton.getEnabled()) {
-					handleRemove();
-				}
+    this.projectsViewer.getTable().addKeyListener(new KeyAdapter() {
 
-			}
-		});
+      @Override
+      public void keyPressed(final KeyEvent e) {
+        if ((e.keyCode == SWT.DEL) && ProjectSection.this.removeButton.getEnabled()) {
+          handleRemove();
+        }
 
-		this.projectsViewer
-				.addSelectionChangedListener(new ISelectionChangedListener() {
+      }
+    });
 
-					@Override
-					public void selectionChanged(
-							final SelectionChangedEvent event) {
-						IStructuredSelection selection = (IStructuredSelection) event
-								.getSelection();
-						ProjectSection.this.removeButton.setEnabled(selection
-								.size() > 0);
+    this.projectsViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
-					}
-				});
-		return this.projectsViewer;
-	}
+      @Override
+      public void selectionChanged(final SelectionChangedEvent event) {
+        IStructuredSelection selection = (IStructuredSelection) event.getSelection();
+        ProjectSection.this.removeButton.setEnabled(selection.size() > 0);
 
-	/**
-	 * @param toolkit
-	 *            form toolkit used to create the widgets
-	 * @param client
-	 *            client composite
-	 */
-	private void createButtons(final FormToolkit toolkit, final Composite client) {
+      }
+    });
+    return this.projectsViewer;
+  }
 
-		Composite buttonComposite = toolkit.createComposite(client, SWT.NONE);
-		GridLayoutFactory.fillDefaults().numColumns(1).margins(SWT.DEFAULT, 10)
-				.applyTo(buttonComposite);
-		GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING)
-				.applyTo(buttonComposite);
+  /**
+   * Creates buttons which help add/remove projects from PSF file
+   * 
+   * @param toolkit form toolkit used to create the widgets
+   * @param client client composite
+   */
+  private void createButtons(final FormToolkit toolkit, final Composite client) {
 
-		this.addButton = toolkit.createButton(buttonComposite,
-				PSFEMessages.ProjectSection_AddButton_name, SWT.PUSH);
-		GridDataFactory.fillDefaults().hint(90, SWT.DEFAULT)
-				.applyTo(this.addButton);
-		this.addButton.addSelectionListener(new SelectionAdapter() {
+    Composite buttonComposite = toolkit.createComposite(client, SWT.NONE);
+    GridLayoutFactory.fillDefaults().numColumns(1).margins(SWT.DEFAULT, 10).applyTo(buttonComposite);
+    GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(buttonComposite);
 
-			@Override
-			public void widgetSelected(final SelectionEvent e) {
-				handleAdd();
-			}
-		});
+    this.addButton =
+        toolkit.createButton(buttonComposite, ProjectSetEditorMessages.ProjectSection_AddButton_name, SWT.PUSH);
+    GridDataFactory.fillDefaults().hint(90, SWT.DEFAULT).applyTo(this.addButton);
+    this.addButton.addSelectionListener(new SelectionAdapter() {
 
-		this.removeButton = toolkit.createButton(buttonComposite,
-				PSFEMessages.ProjectSection_RemoveButton_name, SWT.PUSH);
-		GridDataFactory.fillDefaults().grab(true, false).hint(90, SWT.DEFAULT)
-				.applyTo(this.removeButton);
-		this.removeButton.setEnabled(false);
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        handleAdd();
+      }
+    });
 
-		this.removeButton.addSelectionListener(new SelectionAdapter() {
+    this.removeButton =
+        toolkit.createButton(buttonComposite, ProjectSetEditorMessages.ProjectSection_RemoveButton_name, SWT.PUSH);
+    GridDataFactory.fillDefaults().grab(true, false).hint(90, SWT.DEFAULT).applyTo(this.removeButton);
+    this.removeButton.setEnabled(false);
 
-			@Override
-			public void widgetSelected(final SelectionEvent e) {
-				handleRemove();
-			}
-		});
+    this.removeButton.addSelectionListener(new SelectionAdapter() {
 
-	}
+      @Override
+      public void widgetSelected(final SelectionEvent e) {
+        handleRemove();
+      }
+    });
 
-	/**
-	 * Handles adding of new projects to project set
-	 */
-	private void handleAdd() {
+  }
 
-		try {
+  /**
+   * Handles adding of new projects to project set
+   */
+  private void handleAdd() {
 
-			Set<IProject> differenceProjects = getProjectsToCreate(getProjectSet());
+    try {
 
-			ListSelectionDialog selectionDialog = new ListSelectionDialog(
-					this.projectsViewer.getTable().getShell(),
-					differenceProjects, new ArrayContentProvider(),
-					new WorkbenchLabelProvider(),
-					PSFEMessages.ProjectSection_ProjectSelectionDialog_title);
+      Set<IProject> differenceProjects = getProjectsToCreate(getProjectSet());
 
-			if (selectionDialog.open() == Window.OK) {
+      ListSelectionDialog selectionDialog =
+          new ListSelectionDialog(this.projectsViewer.getTable().getShell(), differenceProjects,
+              new ArrayContentProvider(), new WorkbenchLabelProvider(),
+              ProjectSetEditorMessages.ProjectSection_ProjectSelectionDialog_title);
 
-				Object[] result = selectionDialog.getResult();
+      if (selectionDialog.open() == Window.OK) {
 
-				if (result != null) {
+        Object[] result = selectionDialog.getResult();
 
-					IProject[] selectedProjects = Arrays.copyOf(result,
-							result.length, IProject[].class);
-					ProjectSetHandler.INSTANCE.createProjects(getProjectSet(),
-							selectedProjects);
-					ProjectSetHandler.INSTANCE.createWorkingSets(
-							getProjectSet(), selectedProjects);
-				}
-			}
-		} catch (ProjectSetException e) {
-			MessageDialog.openError(
-					ProjectSection.this.getSection().getShell(),
-					PSFEMessages.ProjectSection_ProjectAdd_error,
-					e.getMessage());
-		}
+        if (result != null) {
 
-	}
+          IProject[] selectedProjects = Arrays.copyOf(result, result.length, IProject[].class);
+          ProjectSetHandler.INSTANCE.createProjects(getProjectSet(), selectedProjects);
+          ProjectSetHandler.INSTANCE.createWorkingSets(getProjectSet(), selectedProjects);
+        }
+      }
+    }
+    catch (ProjectSetException e) {
+      this.projectSetEditor.showError(ProjectSetEditorMessages.ProjectSection_ProjectAdd_error, e);
+    }
 
-	/**
-	 * Compares the project set model to workpace projects and returns the
-	 * missing projects in project set
-	 * 
-	 * @param projectSet
-	 *            project set model
-	 * @return returns the difference {@link IProject} in project set
-	 * @throws ProjectSetException
-	 *             exceptions during checking projects in workspace
-	 */
-	protected Set<IProject> getProjectsToCreate(final IProjectSet projectSet)
-			throws ProjectSetException {
+  }
 
-		Set<IProject> projectsToCreate = new HashSet<IProject>();
-		Set<String> projectsInProjectSet = new HashSet<String>();
+  /**
+   * Compares the project set model to workspace projects and returns the missing projects in project set
+   * 
+   * @param projectSet project set model
+   * @return returns the difference {@link IProject} in project set
+   * @throws ProjectSetException exceptions during checking projects in workspace
+   */
+  protected Set<IProject> getProjectsToCreate(final IProjectSet projectSet) throws ProjectSetException {
 
-		// TODO: Change equals() of Project to do the matching
-		for (IProvider provider : projectSet.getProviders()) {
-			for (Project project : provider.getProjects()) {
-				projectsInProjectSet.add(project.getReferences().get(
-						project.getProvider().getProjectIndex()));
-			}
-		}
+    Set<IProject> projectsToCreate = new HashSet<IProject>();
+    Set<String> projectsInProjectSet = new HashSet<String>();
 
-		IResource[] projectsInWorkspace = null;
-		try {
-			projectsInWorkspace = ResourcesPlugin.getWorkspace().getRoot()
-					.members();
-		} catch (CoreException e) {
-			throw new ProjectSetException(e);
-		}
+    // TODO: Change equals() of Project to do the matching
+    for (org.eclipselabs.team.ui.psf.editor.core.IProject project : projectSet.getProjects()) {
+      projectsInProjectSet.add(project.getReferences().get(project.getProvider().getProjectIndex()));
+    }
 
-		if (projectsInWorkspace != null) {
-			for (IResource member : projectsInWorkspace) {
-				if (member instanceof IProject) {
-					if (projectsInProjectSet.add(member.getName())) {
-						projectsToCreate.add((IProject) member);
-					}
-				}
-			}
-		}
+    IResource[] projectsInWorkspace = null;
+    try {
+      projectsInWorkspace = ResourcesPlugin.getWorkspace().getRoot().members();
+    }
+    catch (CoreException e) {
+      throw new ProjectSetException(e);
+    }
 
-		return projectsToCreate;
-	}
+    if (projectsInWorkspace != null) {
+      for (IResource member : projectsInWorkspace) {
+        if (member instanceof IProject) {
+          if (projectsInProjectSet.add(member.getName())) {
+            projectsToCreate.add((IProject) member);
+          }
+        }
+      }
+    }
 
-	/**
-	 * Handles removing of projects from project set
-	 */
-	private void handleRemove() {
+    return projectsToCreate;
+  }
 
-		IStructuredSelection selection = (IStructuredSelection) this.projectsViewer
-				.getSelection();
+  /**
+   * Handles removing of projects from project set
+   */
+  @SuppressWarnings("unchecked")
+  private void handleRemove() {
 
-		if (!selection.isEmpty()) {
-			ProjectSetHandler.INSTANCE
-					.removeProjects(
-							getProjectSet(),
-							new HashSet<org.eclipselabs.team.ui.psf.editor.core.IProject>(
-									selection.toList()));
-		}
+    IStructuredSelection selection = (IStructuredSelection) this.projectsViewer.getSelection();
 
-	}
+    if (!selection.isEmpty()) {
+      ProjectSetHandler.INSTANCE.removeProjects(getProjectSet(),
+          new HashSet<org.eclipselabs.team.ui.psf.editor.core.IProject>(selection.toList()));
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void contentChanged(final IContentDelta contentDelta) {
+  }
 
-		Object content = contentDelta.getObject();
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void contentChanged(final IContentDelta contentDelta) {
 
-		if ((content != null) && (content instanceof Set<?>)) {
-			Set<IProjectSet> delta = (Set<IProjectSet>) content;
-			if (delta.size() > 0) {
-				this.projectsViewer.refresh();
-				this.projectsViewer.setSelection(new StructuredSelection(delta
-						.toArray()[0]));
-				ProjectSection.this.projectSetEditor.setDirty(true);
-			}
+    Object content = contentDelta.getObject();
 
-		}
+    if ((content != null) && (content instanceof Set<?>)) {
+      @SuppressWarnings("unchecked")
+      Set<IProjectSet> delta = (Set<IProjectSet>) content;
+      if (delta.size() > 0) {
+        this.projectsViewer.refresh();
+        if (contentDelta.getType() == IContentDelta.ADDED) {
+          this.projectsViewer.setSelection(new StructuredSelection(delta.toArray()));
+        }
+        ProjectSection.this.projectSetEditor.setDirty(true);
+      }
 
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void dispose() {
-		super.dispose();
-		ProjectSetHandler.INSTANCE.removeContentChangedListener(this);
-	}
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void dispose() {
+    super.dispose();
+    ProjectSetHandler.INSTANCE.removeContentChangedListener(this);
+  }
 
 }

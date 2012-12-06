@@ -1,21 +1,16 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor.core;
 
 
 import java.util.Map;
 
+import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
 import org.eclipselabs.team.ui.psf.editor.providers.CVSProvider;
 import org.eclipselabs.team.ui.psf.editor.providers.SVNProvider;
-
 
 
 /**
@@ -45,8 +40,9 @@ public class ProjectSetFactory {
    * @param id of the team provider. For exampple, SVN Team Provider has id as
    *          "org.tigris.subversion.subclipse.core.svnnature"
    * @return created Provider
+   * @throws ProjectSetException
    */
-  public IProvider createProvider(final IProjectSet projectSet, final String id) {
+  public IProvider createProvider(final IProjectSet projectSet, final String id) throws ProjectSetException {
 
     IProvider provider = doCreateProvider(projectSet, id);
     return provider;
@@ -59,8 +55,9 @@ public class ProjectSetFactory {
    * @param id of the team provider. For exampple, SVN Team Provider has id as
    *          "org.tigris.subversion.subclipse.core.svnnature"
    * @return created Provider
+   * @throws ProjectSetException
    */
-  protected IProvider doCreateProvider(final IProjectSet projectSet, final String id) {
+  protected IProvider doCreateProvider(final IProjectSet projectSet, final String id) throws ProjectSetException {
 
     IProvider provider = null;
 
@@ -74,7 +71,7 @@ public class ProjectSetFactory {
     // provider = new GitProvider(projectSet, id);
     // }
     else {
-      provider = new Provider(projectSet, id);
+      throw new ProjectSetException("Team Provider '" + id + "' not supported");
     }
 
     IProvider existingProvider = getExistingProvider(projectSet, provider);

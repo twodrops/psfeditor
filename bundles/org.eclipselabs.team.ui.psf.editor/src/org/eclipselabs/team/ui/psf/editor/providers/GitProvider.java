@@ -23,8 +23,8 @@ public class GitProvider extends Provider {
   private static final int PROJECT_INDEX = 2;
 
   /**
-   * @param projectSet
-   * @param id
+   * @param projectSet Project Set model
+   * @param id id of team provider
    */
   public GitProvider(final IProjectSet projectSet, final String id) {
     super(projectSet, id);

@@ -35,8 +35,10 @@ import org.eclipse.ui.IPersistableElement;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.XMLMemento;
+import org.eclipselabs.team.ui.psf.editor.ProjectSetEditorMessages;
 import org.eclipselabs.team.ui.psf.editor.change.service.ContentChangedProvider;
 import org.eclipselabs.team.ui.psf.editor.change.service.ContentDelta;
+import org.eclipselabs.team.ui.psf.editor.change.service.IContentChangedListener;
 import org.eclipselabs.team.ui.psf.editor.change.service.IContentChangedProvider;
 import org.eclipselabs.team.ui.psf.editor.change.service.IContentDelta;
 import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
@@ -48,29 +50,39 @@ import org.w3c.dom.Element;
 
 
 /**
+ * Handler class for working with Project Set model
+ * 
  * @author Nirmal Sasidharan
  */
 public class ProjectSetHandler extends ContentChangedProvider implements IContentChangedProvider {
 
   /**
-   * 
+   * Singleton instance of ProjectSetHandler
    */
   public static final ProjectSetHandler INSTANCE = new ProjectSetHandler();
 
 
+  /**
+   * Static counter for creating unique id for working sets
+   */
   private static int counter;
 
 
   /**
-   * @param projectSet
-   * @param projects
-   * @throws ProjectSetException
-   * @throws TeamException
+   * Creates projects in Project Set model for workspace projects passed. Provides the created projects as delta to
+   * {@link IContentChangedListener}s
+   * 
+   * @param projectSet Project Set model
+   * @param projects Workspace project for which {@link org.eclipselabs.team.ui.psf.editor.core.IProject} needs to be
+   *          created
+   * @throws ProjectSetException Exception during creation of projects
    */
   public void createProjects(final IProjectSet projectSet, final IProject[] projects) throws ProjectSetException {
 
     Set<org.eclipselabs.team.ui.psf.editor.core.IProject> projectsAdded =
         new HashSet<org.eclipselabs.team.ui.psf.editor.core.IProject>();
+
+    // Creating hash using provider id as key
     Map<String, Set<IProject>> projectsHash = hashProjectsByProvider(projects);
 
     ProjectSetSerializationContext context = new ProjectSetSerializationContext();
@@ -94,9 +106,10 @@ public class ProjectSetHandler extends ContentChangedProvider implements IConten
         try {
           references = projectSetCapability.asReference(projectArray, context, new NullProgressMonitor());
           for (String reference : references) {
-            org.eclipselabs.team.ui.psf.editor.core.IProject newProject = ProjectSetFactory.INSTANCE.createProject(provider);
+            org.eclipselabs.team.ui.psf.editor.core.IProject newProject =
+                ProjectSetFactory.INSTANCE.createProject(provider);
             projectsAdded.add(newProject);
-            newProject.getReferences().addAll(Arrays.asList(reference.split(",")));
+            newProject.getReferences().addAll(Arrays.asList(reference.split(","))); //$NON-NLS-1$
           }
         }
 
@@ -113,12 +126,28 @@ public class ProjectSetHandler extends ContentChangedProvider implements IConten
   }
 
   /**
-   * @param projectSet
-   * @param projects
-   * @param projectsAdded
+   * Removes projects in Project Set model for projects passed. Provides the removed projects as delta to
+   * {@link IContentChangedListener}s
+   * 
+   * @param projectSet Project Set model
+   * @param projects Workspace project for which {@link org.eclipselabs.team.ui.psf.editor.core.IProject} needs to be
+   *          created
+   */
+  public void removeProjects(final IProjectSet projectSet,
+      final Set<org.eclipselabs.team.ui.psf.editor.core.IProject> projects) {
+    for (IProvider provider : projectSet.getProviders()) {
+      provider.getProjects().removeAll(projects);
+    }
+    setContentDelta(new ContentDelta(projects, IContentDelta.REMOVED));
+  }
+
+  /**
+   * Creates working sets in Project Set model for the passed workspace projects
+   * 
+   * @param projectSet Project Set model
+   * @param projects workspace projects for which Working Sets needs to be created
    */
   public void createWorkingSets(final IProjectSet projectSet, final IProject[] projects) {
-
 
     for (IProject project : projects) {
 
@@ -222,25 +251,14 @@ public class ProjectSetHandler extends ContentChangedProvider implements IConten
         projectsList.add(project);
       }
       else {
-        throw new ProjectSetException("Project '" + project.getName() +
-            "' is not part of any repository. Cannot add this to ProjectSet");
+        throw new ProjectSetException(ProjectSetEditorMessages.ProjectSetHandler_Invalid_Project_error_01 +
+            project.getName() + ProjectSetEditorMessages.ProjectSetHandler_Invalid_Project_error_02);
       }
     }
 
     return projectsHash;
   }
 
-  /**
-   * @param projectSet
-   * @param projects
-   */
-  public void removeProjects(final IProjectSet projectSet,
-      final Set<org.eclipselabs.team.ui.psf.editor.core.IProject> projects) {
-    for (IProvider provider : projectSet.getProviders()) {
-      provider.getProjects().removeAll(projects);
-    }
-    setContentDelta(new ContentDelta(projects, IContentDelta.REMOVED));
-  }
 
   protected String getUniqueId() {
     return Long.toString(System.currentTimeMillis()) + "_" + counter++; //$NON-NLS-1$
