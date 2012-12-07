@@ -135,11 +135,11 @@ public class ProjectSetReader {
     IMemento[] providersMemento = xmlMemento.getChildren("provider"); //$NON-NLS-1$
 
     for (IMemento providerMemento : providersMemento) {
-      IProvider provider = ProjectSetFactory.INSTANCE.createProvider(projectSet, providerMemento.getString("id"));
+      IProvider provider = ProjectSetFactory.INSTANCE.createProvider(projectSet, providerMemento.getString("id")); //$NON-NLS-1$
       IMemento[] projectsMemento = providerMemento.getChildren("project"); //$NON-NLS-1$
       for (IMemento projectMemento : projectsMemento) {
         IProject project = ProjectSetFactory.INSTANCE.createProject(provider);
-        project.getReferences().addAll(Arrays.asList(projectMemento.getString("reference").split(","))); //$NON-NLS-1$
+        project.getReferences().addAll(Arrays.asList(projectMemento.getString("reference").split(","))); //$NON-NLS-1$ 
       }
     }
   }

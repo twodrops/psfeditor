@@ -8,6 +8,7 @@ package org.eclipselabs.team.ui.psf.editor.core;
 
 import java.util.Map;
 
+import org.eclipselabs.team.ui.psf.editor.ProjectSetEditorMessages;
 import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
 import org.eclipselabs.team.ui.psf.editor.providers.CVSProvider;
 import org.eclipselabs.team.ui.psf.editor.providers.SVNProvider;
@@ -71,7 +72,7 @@ public class ProjectSetFactory {
     // provider = new GitProvider(projectSet, id);
     // }
     else {
-      throw new ProjectSetException("Team Provider '" + id + "' not supported");
+      throw new ProjectSetException(ProjectSetEditorMessages.ProjectSetFactory_Provider_error_01 + id + ProjectSetEditorMessages.ProjectSetFactory_Provider_error_02);
     }
 
     IProvider existingProvider = getExistingProvider(projectSet, provider);

@@ -12,11 +12,13 @@ package org.eclipselabs.team.ui.psf.editor.core;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IAdaptable;
+
 
 /**
  * @author Nirmal Sasidharan
  */
-public interface IProject {
+public interface IProject extends IAdaptable {
 
   /**
    * @return the references

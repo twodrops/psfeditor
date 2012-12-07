@@ -42,6 +42,12 @@ public class ProjectSetWriter {
 
   public static final ProjectSetWriter INSTANCE = new ProjectSetWriter();
 
+  /**
+   * @param projectSet
+   * @param fFile
+   * @param monitor
+   * @throws ProjectSetException
+   */
   public void save(final IProjectSet projectSet, final IFile fFile, final IProgressMonitor monitor)
       throws ProjectSetException {
 

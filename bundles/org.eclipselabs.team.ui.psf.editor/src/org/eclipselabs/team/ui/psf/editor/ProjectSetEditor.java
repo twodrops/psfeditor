@@ -176,6 +176,9 @@ public class ProjectSetEditor extends FormEditor {
     return this.dirty || super.isDirty();
   }
 
+  /**
+   * @param dirty
+   */
   protected void setDirty(final boolean dirty) {
     this.dirty = this.dirty || dirty;
     editorDirtyStateChanged();
@@ -192,6 +195,10 @@ public class ProjectSetEditor extends FormEditor {
     Display display = getSite().getShell().getDisplay();
     display.asyncExec(new Runnable() {
 
+      /**
+       * {@inheritDoc}
+       */
+      @Override
       public void run() {
         MessageDialog.openError(getSite().getShell(), ProjectSetEditorMessages.ProjectSetEditor_Error_title,
             exception.getMessage());
@@ -225,6 +232,9 @@ public class ProjectSetEditor extends FormEditor {
     editorDirtyStateChanged();
   }
 
+  /**
+   * @return
+   */
   public IProjectSet getProjectSet() {
     return this.projectSetInputHandler.getProjectSet();
   }
@@ -265,6 +275,7 @@ public class ProjectSetEditor extends FormEditor {
       if ((this.projectSetFileInWorkspace == null) || (projectSetFile == null) || !projectSetFile.exists()) {
         close(false);
       }
+      // TODO: Should this be changed to a init() method as setInput() could be called multiple times
       ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
     }
 
@@ -287,8 +298,8 @@ public class ProjectSetEditor extends FormEditor {
     }
 
     protected void loadProjectSet() throws ProjectSetException {
-      FileEditorInput editorInput = (FileEditorInput) getEditorInput();
-      String filename = editorInput.getFile().getRawLocation().toOSString();
+      this.editorInput = getEditorInput();
+      String filename = ((FileEditorInput) this.editorInput).getFile().getRawLocation().toOSString();
       this.projectSet = ProjectSetReader.INSTANCE.load(filename);
     }
 
@@ -326,6 +337,10 @@ public class ProjectSetEditor extends FormEditor {
               Display display = getSite().getShell().getDisplay();
               display.asyncExec(new Runnable() {
 
+                /**
+                 * {@inheritDoc}
+                 */
+                @Override
                 public void run() {
                   doRevert();
                 }

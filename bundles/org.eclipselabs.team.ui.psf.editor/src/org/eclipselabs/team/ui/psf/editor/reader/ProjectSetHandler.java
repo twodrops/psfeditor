@@ -171,6 +171,7 @@ public class ProjectSetHandler extends ContentChangedProvider implements IConten
     }
   }
 
+
   /**
    * @param persistable
    * @return
