@@ -52,7 +52,7 @@ import org.eclipselabs.team.ui.psf.editor.writer.ProjectSetWriter;
  * 
  * @author Nirmal Sasidharan
  */
-public class ProjectSetEditor extends FormEditor {
+public class ProjectSetEditor extends FormEditor implements IProjectSetEditor {
 
   private final List<IManagedForm> formPages = new ArrayList<IManagedForm>(1);
   private final ProjectSetInputHandler projectSetInputHandler = new ProjectSetInputHandler();
@@ -71,7 +71,6 @@ public class ProjectSetEditor extends FormEditor {
     catch (PartInitException e) {
       showError(ProjectSetEditorMessages.ProjectSetEditor_FormPage_Create_error, new ProjectSetException(e));
     }
-
   }
 
 
@@ -96,7 +95,7 @@ public class ProjectSetEditor extends FormEditor {
 
 
   /**
-   * Saves the multi-page editor's document.
+   * Saves the psf file.
    */
   @Override
   public void doSave(final IProgressMonitor monitor) {
@@ -112,8 +111,7 @@ public class ProjectSetEditor extends FormEditor {
   }
 
   /**
-   * Saves the multi-page editor's document as another file. Also updates the text for page 0's tab, and updates this
-   * multi-page editor's input to correspond to the nested editor's.
+   * Saves the psf file as another file.
    */
   @Override
   public void doSaveAs() {
@@ -177,7 +175,9 @@ public class ProjectSetEditor extends FormEditor {
   }
 
   /**
-   * @param dirty
+   * Set editor as dirty
+   * 
+   * @param dirty true to set dirty, else false
    */
   protected void setDirty(final boolean dirty) {
     this.dirty = this.dirty || dirty;
@@ -209,7 +209,7 @@ public class ProjectSetEditor extends FormEditor {
   /**
    * Adds the given form to the list of forms to be refreshed when reverting
    * 
-   * @param managedForm
+   * @param managedForm Form to be added
    */
   public void addForm(final IManagedForm managedForm) {
     this.formPages.add(managedForm);
@@ -233,18 +233,22 @@ public class ProjectSetEditor extends FormEditor {
   }
 
   /**
-   * @return
+   * @return {@link IProjectSet}
    */
   public IProjectSet getProjectSet() {
     return this.projectSetInputHandler.getProjectSet();
   }
 
 
+  /**
+   * Input handler class for ProjectSet
+   */
   private class ProjectSetInputHandler implements IResourceChangeListener {
 
     private IEditorInput editorInput;
     private IProjectSet projectSet;
     private IFile projectSetFileInWorkspace;
+    // Check if saving is active
     private boolean saving = false;
 
     public void dispose() {
@@ -255,6 +259,11 @@ public class ProjectSetEditor extends FormEditor {
       setInput(this.editorInput);
     }
 
+    /**
+     * Set input to ProjectSet Handler
+     * 
+     * @param input editor input
+     */
     public void setInput(final IEditorInput input) {
       this.editorInput = input;
       this.projectSetFileInWorkspace = null;
@@ -280,7 +289,7 @@ public class ProjectSetEditor extends FormEditor {
     }
 
     /**
-     * @return the target definition that is the input to the editor
+     * @return the project set that is the input to the editor
      */
     public IProjectSet getProjectSet() {
       if (this.projectSet == null) {
@@ -297,14 +306,24 @@ public class ProjectSetEditor extends FormEditor {
       return this.projectSet;
     }
 
+    /**
+     * Loads Project set
+     * 
+     * @throws ProjectSetException thrown during errors encounter while loading
+     */
     protected void loadProjectSet() throws ProjectSetException {
       this.editorInput = getEditorInput();
       String filename = ((FileEditorInput) this.editorInput).getFile().getRawLocation().toOSString();
       this.projectSet = ProjectSetReader.INSTANCE.load(filename);
     }
 
+    /**
+     * Save Project set to psf file
+     * 
+     * @param file Eclipe resource file
+     * @throws ProjectSetException Thrown during errors while saving
+     */
     public void saveProjectSet(final IFile file) throws ProjectSetException {
-
       this.saving = true;
       try {
         ProjectSetWriter.INSTANCE.save(this.projectSet, file, new NullProgressMonitor());
