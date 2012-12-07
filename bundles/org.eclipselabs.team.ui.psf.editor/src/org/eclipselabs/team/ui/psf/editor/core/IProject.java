@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IAdaptable;
 
 
 /**
+ * Represents a project in Project Set model
  * @author Nirmal Sasidharan
  */
 public interface IProject extends IAdaptable {
