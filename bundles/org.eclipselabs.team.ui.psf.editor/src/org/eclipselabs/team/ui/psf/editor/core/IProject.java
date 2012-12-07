@@ -14,6 +14,7 @@ import java.util.List;
 
 
 /**
+ * Represents a project in Project Set model
  * @author Nirmal Sasidharan
  */
 public interface IProject {
