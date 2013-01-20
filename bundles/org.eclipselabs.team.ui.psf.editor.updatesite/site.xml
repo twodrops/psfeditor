@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description name="ProjectSet Editor Update Site" url="https://code.google.com/a/eclipselabs.org/p/psfeditor.updatesite/">
+      Update Site for ProjectSet Editor at Eclipselabs
+   </description>
+   <feature url="features/org.eclipselabs.team.ui.psf.editor.feature_0.0.2.jar" id="org.eclipselabs.team.ui.psf.editor.feature" version="0.0.2"/>
+</site>
