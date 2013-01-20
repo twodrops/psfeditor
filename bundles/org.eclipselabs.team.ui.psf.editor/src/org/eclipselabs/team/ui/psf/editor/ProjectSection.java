@@ -221,7 +221,7 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
   private void createButtons(final FormToolkit toolkit, final Composite client) {
 
     Composite buttonComposite = toolkit.createComposite(client, SWT.NONE);
-    GridLayoutFactory.fillDefaults().numColumns(1).margins(SWT.DEFAULT, 10).applyTo(buttonComposite);
+    GridLayoutFactory.fillDefaults().numColumns(1).margins(5, 5).applyTo(buttonComposite);
     GridDataFactory.fillDefaults().align(SWT.BEGINNING, SWT.BEGINNING).applyTo(buttonComposite);
 
     this.addButton =
