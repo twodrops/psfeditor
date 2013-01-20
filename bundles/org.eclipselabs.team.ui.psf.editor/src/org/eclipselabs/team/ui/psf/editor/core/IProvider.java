@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor.core;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -28,6 +29,6 @@ public interface IProvider {
    */
   public abstract String getId();
 
-  public abstract int getProjectIndex();
+  public abstract String getProjectName(List<String> references);
 
 }

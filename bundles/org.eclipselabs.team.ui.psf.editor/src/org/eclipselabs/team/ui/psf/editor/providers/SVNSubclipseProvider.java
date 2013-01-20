@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor.providers;
 
+import java.util.List;
+
 import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
 import org.eclipselabs.team.ui.psf.editor.core.Provider;
 
@@ -17,15 +19,16 @@ import org.eclipselabs.team.ui.psf.editor.core.Provider;
 /**
  * @author Nirmal Sasidharan
  */
-public class SVNProvider extends Provider {
+public class SVNSubclipseProvider extends Provider {
 
+  public static final String PROVIDER_ID = "org.tigris.subversion.subclipse.core.svnnature"; //$NON-NLS-1$
   private static final int PROJECT_INDEX = 2;
 
   /**
    * @param projectSet Project Set model
    * @param id id of team provider
    */
-  public SVNProvider(final IProjectSet projectSet, final String id) {
+  public SVNSubclipseProvider(final IProjectSet projectSet, final String id) {
     super(projectSet, id);
   }
 
@@ -34,7 +37,7 @@ public class SVNProvider extends Provider {
    * {@inheritDoc}
    */
   @Override
-  public int getProjectIndex() {
-    return PROJECT_INDEX;
+  public String getProjectName(final List<String> references) {
+    return references.get(PROJECT_INDEX);
   }
 }

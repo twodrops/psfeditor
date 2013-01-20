@@ -11,7 +11,9 @@ import java.util.Map;
 import org.eclipselabs.team.ui.psf.editor.ProjectSetEditorMessages;
 import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
 import org.eclipselabs.team.ui.psf.editor.providers.CVSProvider;
-import org.eclipselabs.team.ui.psf.editor.providers.SVNProvider;
+import org.eclipselabs.team.ui.psf.editor.providers.GitProvider;
+import org.eclipselabs.team.ui.psf.editor.providers.SVNSubclipseProvider;
+import org.eclipselabs.team.ui.psf.editor.providers.SVNSubversiveProvider;
 
 
 /**
@@ -62,17 +64,21 @@ public class ProjectSetFactory {
 
     IProvider provider = null;
 
-    if (id.equals("org.tigris.subversion.subclipse.core.svnnature")) { //$NON-NLS-1$
-      provider = new SVNProvider(projectSet, id);
+    if (id.equals(SVNSubclipseProvider.PROVIDER_ID)) {
+      provider = new SVNSubclipseProvider(projectSet, id);
     }
-    else if (id.equals("org.eclipse.team.cvs.core.cvsnature")) { //$NON-NLS-1$
+    else if (id.equals(SVNSubversiveProvider.PROVIDER_ID)) {
+      provider = new SVNSubversiveProvider(projectSet, id);
+    }
+    else if (id.equals(CVSProvider.PROVIDER_ID)) {
       provider = new CVSProvider(projectSet, id);
     }
-    //    else if (id.equals("org.eclipse.team.git.core.gitnature")) { //$NON-NLS-1$
-    // provider = new GitProvider(projectSet, id);
-    // }
+    else if (id.equals(GitProvider.PROVIDER_ID)) {
+      provider = new GitProvider(projectSet, id);
+    }
     else {
-      throw new ProjectSetException(ProjectSetEditorMessages.ProjectSetFactory_Provider_error_01 + id + ProjectSetEditorMessages.ProjectSetFactory_Provider_error_02);
+      throw new ProjectSetException(ProjectSetEditorMessages.ProjectSetFactory_Provider_error_01 + id +
+          ProjectSetEditorMessages.ProjectSetFactory_Provider_error_02);
     }
 
     IProvider existingProvider = getExistingProvider(projectSet, provider);

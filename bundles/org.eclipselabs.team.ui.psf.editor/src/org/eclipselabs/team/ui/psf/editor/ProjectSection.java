@@ -296,7 +296,7 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
 
     // TODO: Change equals() of Project to do the matching
     for (org.eclipselabs.team.ui.psf.editor.core.IProject project : projectSet.getProjects()) {
-      projectsInProjectSet.add(project.getReferences().get(project.getProvider().getProjectIndex()));
+      projectsInProjectSet.add(project.toString());
     }
 
     IResource[] projectsInWorkspace = null;

@@ -19,16 +19,16 @@ import org.eclipselabs.team.ui.psf.editor.core.Provider;
 /**
  * @author Nirmal Sasidharan
  */
-public class GitProvider extends Provider {
+public class SVNSubversiveProvider extends Provider {
 
-  public static final String PROVIDER_ID = "org.eclipse.egit.core.GitProvider"; //$NON-NLS-1$
-  private static final int PROJECT_INDEX = 3;
+  public static final String PROVIDER_ID = "org.eclipse.team.svn.core.svnnature"; //$NON-NLS-1$
+  private static final int PROJECT_INDEX = 2;
 
   /**
    * @param projectSet Project Set model
    * @param id id of team provider
    */
-  public GitProvider(final IProjectSet projectSet, final String id) {
+  public SVNSubversiveProvider(final IProjectSet projectSet, final String id) {
     super(projectSet, id);
   }
 
@@ -38,7 +38,6 @@ public class GitProvider extends Provider {
    */
   @Override
   public String getProjectName(final List<String> references) {
-    String[] referenceTokens = references.get(PROJECT_INDEX).split("/");
-    return referenceTokens[referenceTokens.length - 1];
+    return references.get(PROJECT_INDEX);
   }
 }

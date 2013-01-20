@@ -5,6 +5,8 @@
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor.providers;
 
+import java.util.List;
+
 import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
 import org.eclipselabs.team.ui.psf.editor.core.Provider;
 
@@ -14,6 +16,7 @@ import org.eclipselabs.team.ui.psf.editor.core.Provider;
  */
 public class CVSProvider extends Provider {
 
+  public static final String PROVIDER_ID = "org.eclipse.team.cvs.core.cvsnature"; //$NON-NLS-1$
   private static final int PROJECT_INDEX = 3;
 
   /**
@@ -29,7 +32,7 @@ public class CVSProvider extends Provider {
    * {@inheritDoc}
    */
   @Override
-  public int getProjectIndex() {
-    return PROJECT_INDEX;
+  public String getProjectName(final List<String> references) {
+    return references.get(PROJECT_INDEX);
   }
 }

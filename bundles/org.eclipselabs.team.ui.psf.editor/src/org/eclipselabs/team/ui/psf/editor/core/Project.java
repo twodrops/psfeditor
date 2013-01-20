@@ -98,7 +98,7 @@ public class Project extends PlatformObject implements IAdaptable, IProject {
    * @return
    */
   protected String getName() {
-    return getReferences().get(getProvider().getProjectIndex());
+    return getProvider().getProjectName(getReferences());
   }
 
 

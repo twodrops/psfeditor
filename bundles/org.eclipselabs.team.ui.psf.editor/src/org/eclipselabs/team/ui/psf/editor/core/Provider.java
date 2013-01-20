@@ -11,6 +11,7 @@
 package org.eclipselabs.team.ui.psf.editor.core;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -55,8 +56,8 @@ public class Provider implements IProvider {
    * {@inheritDoc}
    */
   @Override
-  public int getProjectIndex() {
-    return DEFAULT_INDEX;
+  public String getProjectName(final List<String> references) {
+    return references.get(DEFAULT_INDEX);
   }
 
   /**
