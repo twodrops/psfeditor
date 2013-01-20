@@ -31,9 +31,6 @@ public class Provider implements IProvider {
    * @param id2
    */
   public Provider(final IProjectSet projectSet, final String id) {
-    // TODO: Unlike other model elements the created Provider is not automatically added to its parent. This is not
-    // possible due to the check required to see if the provider already exists. This is however inconsistent with other
-    // model elements
     this.projectSet = projectSet;
     this.id = id;
   }

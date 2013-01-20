@@ -12,11 +12,17 @@
 package org.eclipselabs.team.ui.psf.editor;
 
 import org.eclipse.ui.IEditorPart;
+import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
 
 
 /**
  * @author Nirmal Sasidharan
  */
 public interface IProjectSetEditor extends IEditorPart {
+
+  /**
+   * @return {@link IProjectSet}
+   */
+  public IProjectSet getProjectSet();
 
 }

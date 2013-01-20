@@ -148,7 +148,9 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
    */
   @Override
   public void refresh() {
-    setInput();
+    // TODO: Setting input to viewer here ends up it multiple input setting under certain cases. Hence removing. This
+    // creates issue #6
+    // setInput();
     super.refresh();
   }
 

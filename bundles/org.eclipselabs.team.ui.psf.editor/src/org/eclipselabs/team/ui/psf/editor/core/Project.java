@@ -34,6 +34,8 @@ public class Project extends PlatformObject implements IAdaptable, IProject {
    */
   public Project(final IProvider provider) {
     this.provider = provider;
+    // TODO: The created project is automatically added to the parent provider. This is inconsisent with other model
+    // elements where addition to parent is not automatic
     this.provider.getProjects().add(this);
   }
 

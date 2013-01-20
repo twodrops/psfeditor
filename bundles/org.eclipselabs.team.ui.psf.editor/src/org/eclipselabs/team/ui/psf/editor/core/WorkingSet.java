@@ -38,7 +38,6 @@ public class WorkingSet implements IWorkingSet {
     this.label = label;
     this.name = name;
     this.id = id;
-    // this.projectSet.getWorkingSets().add(this);
   }
 
   /**

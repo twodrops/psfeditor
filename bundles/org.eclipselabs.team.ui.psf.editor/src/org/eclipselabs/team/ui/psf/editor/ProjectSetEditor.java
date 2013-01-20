@@ -193,7 +193,7 @@ public class ProjectSetEditor extends FormEditor implements IProjectSetEditor {
    */
   public void showError(final String message, final ProjectSetException exception) {
     Display display = getSite().getShell().getDisplay();
-    display.asyncExec(new Runnable() {
+    display.syncExec(new Runnable() {
 
       /**
        * {@inheritDoc}
@@ -235,8 +235,22 @@ public class ProjectSetEditor extends FormEditor implements IProjectSetEditor {
   /**
    * @return {@link IProjectSet}
    */
+  @Override
   public IProjectSet getProjectSet() {
-    return this.projectSetInputHandler.getProjectSet();
+
+    IProjectSet projectSet = null;
+
+    try {
+      projectSet = this.projectSetInputHandler.getProjectSet();
+      this.dirty = false;
+      editorDirtyStateChanged();
+    }
+    catch (ProjectSetException e) {
+      showError(ProjectSetEditorMessages.ProjectSetEditor_Load_error, e);
+      close(false);
+    }
+
+    return projectSet;
   }
 
 
@@ -290,18 +304,11 @@ public class ProjectSetEditor extends FormEditor implements IProjectSetEditor {
 
     /**
      * @return the project set that is the input to the editor
+     * @throws ProjectSetException thrown when project set encounters errors
      */
-    public IProjectSet getProjectSet() {
+    public IProjectSet getProjectSet() throws ProjectSetException {
       if (this.projectSet == null) {
-        try {
-          loadProjectSet();
-          ProjectSetEditor.this.dirty = false;
-          editorDirtyStateChanged();
-        }
-        catch (ProjectSetException e) {
-          showError(ProjectSetEditorMessages.ProjectSetEditor_Load_error, e);
-          close(false);
-        }
+        loadProjectSet();
       }
       return this.projectSet;
     }
