@@ -2,7 +2,7 @@
 <feature
       id="org.eclipselabs.team.ui.psf.editor.feature"
       label="ProjectSet Editor"
-      version="0.0.2"
+      version="0.0.3"
       provider-name="Eclipse Labs">
 
    <description url="http://code.google.com/a/eclipselabs.org/p/psfeditor/">
