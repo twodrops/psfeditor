@@ -29,6 +29,17 @@ in a PSF file.
       <update label="ProjectSet Editor Update Site" url="https://code.google.com/a/eclipselabs.org/p/psfeditor.updatesite/"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.core.resources" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.editors" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.forms" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.team.core" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.team.ui" version="3.6.0" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="org.eclipselabs.team.ui.psf.editor"
          download-size="0"
