@@ -12,7 +12,7 @@
 package org.eclipselabs.team.ui.psf.editor;
 
 import org.eclipse.ui.IEditorPart;
-import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
+import org.eclipselabs.team.psf.model.core.IProjectSet;
 
 
 /**

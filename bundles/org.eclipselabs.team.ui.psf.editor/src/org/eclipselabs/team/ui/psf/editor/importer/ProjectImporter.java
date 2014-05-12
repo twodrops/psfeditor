@@ -14,7 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.team.internal.ui.wizards.ImportProjectSetOperation;
 import org.eclipse.ui.IWorkingSet;
-import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
+import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
 
 
 

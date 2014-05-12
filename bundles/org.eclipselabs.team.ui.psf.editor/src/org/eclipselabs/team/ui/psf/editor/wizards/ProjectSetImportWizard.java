@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor.wizards;
 
@@ -99,7 +94,8 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
     }
     catch (InvocationTargetException e) {
       Throwable realException = e.getTargetException();
-      MessageDialog.openError(getShell(), ProjectSetEditorMessages.ProjectSetImportWizard_Wizard_error, realException.getMessage());
+      MessageDialog.openError(getShell(), ProjectSetEditorMessages.ProjectSetImportWizard_Wizard_error,
+          realException.getMessage());
       return false;
     }
     return true;
@@ -117,7 +113,8 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
     IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
     IResource resource = root.findMember(new Path(containerName));
     if (!resource.exists() || !(resource instanceof IContainer)) {
-      throwCoreException(ProjectSetEditorMessages.ProjectSetImportWizard_Container_error_01 + containerName + ProjectSetEditorMessages.ProjectSetImportWizard_Container_error_02);
+      throwCoreException(ProjectSetEditorMessages.ProjectSetImportWizard_Container_error_01 + containerName +
+          ProjectSetEditorMessages.ProjectSetImportWizard_Container_error_02);
     }
     IContainer container = (IContainer) resource;
     final IFile file = container.getFile(new Path(fileName));
@@ -157,13 +154,14 @@ public class ProjectSetImportWizard extends Wizard implements INewWizard {
   }
 
   private void throwCoreException(final String message) throws CoreException {
-    IStatus status = new Status(IStatus.ERROR, ProjectSetEditorMessages.ProjectSetImportWizard_6, IStatus.OK, message, null);
+    IStatus status =
+        new Status(IStatus.ERROR, ProjectSetEditorMessages.ProjectSetImportWizard_6, IStatus.OK, message, null);
     throw new CoreException(status);
   }
 
   /**
    * We will accept the selection in the workbench to see if we can initialize from it.
-   *
+   * 
    * @see IWorkbenchWizard#init(IWorkbench, IStructuredSelection)
    */
   public void init(final IWorkbench workbench, final IStructuredSelection selection) {

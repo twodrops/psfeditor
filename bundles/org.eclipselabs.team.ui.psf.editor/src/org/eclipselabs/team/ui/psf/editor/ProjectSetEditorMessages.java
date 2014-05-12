@@ -29,10 +29,6 @@ public class ProjectSetEditorMessages extends NLS {
   public static String ProjectSetEditor_Save_error;
   public static String ProjectSetEditor_Save_MessageBox_message;
 
-  public static String ProjectSetFactory_Provider_error_01;
-
-  public static String ProjectSetFactory_Provider_error_02;
-
   public static String ProjectSetHandler_Invalid_Project_error_01;
 
   public static String ProjectSetHandler_Invalid_Project_error_02;

@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 package org.eclipselabs.team.ui.psf.editor;
 
@@ -39,10 +34,10 @@ import org.eclipse.ui.forms.IFormPart;
 import org.eclipse.ui.forms.IManagedForm;
 import org.eclipse.ui.forms.editor.FormEditor;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
-import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
-import org.eclipselabs.team.ui.psf.editor.reader.ProjectSetReader;
-import org.eclipselabs.team.ui.psf.editor.writer.ProjectSetWriter;
+import org.eclipselabs.team.psf.model.core.IProjectSet;
+import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
+import org.eclipselabs.team.psf.model.io.reader.ProjectSetReader;
+import org.eclipselabs.team.psf.model.io.writer.ProjectSetWriter;
 
 
 /**

@@ -20,8 +20,8 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
-import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
+import org.eclipselabs.team.psf.model.core.IProjectSet;
+import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
 import org.eclipselabs.team.ui.psf.editor.importer.ProjectImporter;
 
 

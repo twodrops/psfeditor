@@ -2,7 +2,7 @@
 <feature
       id="org.eclipselabs.team.ui.psf.editor.feature"
       label="ProjectSet Editor"
-      version="0.0.3"
+      version="0.0.4"
       provider-name="Eclipse Labs">
 
    <description url="http://code.google.com/a/eclipselabs.org/p/psfeditor/">
@@ -18,7 +18,7 @@ in a PSF file.
    </description>
 
    <copyright url="http://nirmalsasidharan.wordpress.com">
-      Copyright (c) 2012 Nirmal Sasidharan. All rights reserved.
+      Copyright (c) 2012-2014 Nirmal Sasidharan. All rights reserved.
    </copyright>
 
    <license url="http://www.eclipse.org/legal/epl-v10.html">
@@ -30,18 +30,34 @@ in a PSF file.
    </url>
 
    <requires>
+      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.resources" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.editors" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.ide" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.runtime" version="3.7.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.ui.forms" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.team.core" version="3.6.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.team.ui" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.commands" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.team.core" version="3.6.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipselabs.team.psf.model" version="0.0.4" match="greaterOrEqual"/>
+      <import plugin="org.eclipselabs.team.psf.model.io" version="0.0.4" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="org.eclipselabs.team.ui.psf.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipselabs.team.psf.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipselabs.team.psf.model.io"
          download-size="0"
          install-size="0"
          version="0.0.0"

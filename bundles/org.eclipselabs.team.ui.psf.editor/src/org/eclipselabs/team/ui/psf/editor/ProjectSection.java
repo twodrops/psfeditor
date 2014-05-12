@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 
 package org.eclipselabs.team.ui.psf.editor;
@@ -45,11 +40,11 @@ import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
-import org.eclipselabs.team.ui.psf.editor.change.service.IContentChangedListener;
-import org.eclipselabs.team.ui.psf.editor.change.service.IContentDelta;
-import org.eclipselabs.team.ui.psf.editor.core.IProjectSet;
-import org.eclipselabs.team.ui.psf.editor.exceptions.ProjectSetException;
-import org.eclipselabs.team.ui.psf.editor.reader.ProjectSetHandler;
+import org.eclipselabs.team.psf.model.change.service.IContentChangedListener;
+import org.eclipselabs.team.psf.model.change.service.IContentDelta;
+import org.eclipselabs.team.psf.model.core.IProjectSet;
+import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
+import org.eclipselabs.team.psf.model.io.reader.ProjectSetHandler;
 
 /**
  * Section for adding and removing projects in Project Set Editor
@@ -295,7 +290,7 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
     Set<String> projectsInProjectSet = new HashSet<String>();
 
     // TODO: Change equals() of Project to do the matching
-    for (org.eclipselabs.team.ui.psf.editor.core.IProject project : projectSet.getProjects()) {
+    for (org.eclipselabs.team.psf.model.core.IProject project : projectSet.getProjects()) {
       projectsInProjectSet.add(project.toString());
     }
 
@@ -330,7 +325,7 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
 
     if (!selection.isEmpty()) {
       ProjectSetHandler.INSTANCE.removeProjects(getProjectSet(),
-          new HashSet<org.eclipselabs.team.ui.psf.editor.core.IProject>(selection.toList()));
+          new HashSet<org.eclipselabs.team.psf.model.core.IProject>(selection.toList()));
     }
 
   }
