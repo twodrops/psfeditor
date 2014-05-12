@@ -45,7 +45,7 @@ import org.eclipselabs.team.psf.model.change.service.IContentChangedListener;
 import org.eclipselabs.team.psf.model.change.service.IContentDelta;
 import org.eclipselabs.team.psf.model.core.IProjectSet;
 import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
-import org.eclipselabs.team.psf.model.io.reader.ProjectSetHandler;
+import org.eclipselabs.team.psf.model.io.handler.ProjectSetHandler;
 
 /**
  * Section for adding and removing projects in Project Set Editor

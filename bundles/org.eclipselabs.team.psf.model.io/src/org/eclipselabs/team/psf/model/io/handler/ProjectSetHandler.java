@@ -3,7 +3,7 @@
  * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
-package org.eclipselabs.team.psf.model.io.reader;
+package org.eclipselabs.team.psf.model.io.handler;
 
 import java.util.Arrays;
 import java.util.Comparator;
