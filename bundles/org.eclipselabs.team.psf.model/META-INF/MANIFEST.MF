@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ProjectSet Model
+Bundle-SymbolicName: org.eclipselabs.team.psf.model
+Bundle-Version: 0.0.4
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.eclipse.core.commands;bundle-version="3.6.0",
+ org.eclipse.core.resources;bundle-version="3.7.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.eclipselabs.team.psf.model.change.service,
+ org.eclipselabs.team.psf.model.core,
+ org.eclipselabs.team.psf.model.exceptions,
+ org.eclipselabs.team.psf.model.providers
+Bundle-Vendor: Eclipse Labs
