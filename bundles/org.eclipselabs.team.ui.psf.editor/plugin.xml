@@ -8,8 +8,8 @@
             name="Project Set Editor"
             extensions="psf"
             icon="icons/psf.png"
-            class="org.eclipselabs.team.ui.psf.editor.ProjectSetEditor"
-            id="org.eclipselabs.team.ui.psf.editor.ProjectSetEditor">
+            class="org.eclipselabs.team.psf.editor.ProjectSetEditor"
+            id="org.eclipselabs.team.psf.editor.ProjectSetEditor">
       </editor>
    </extension>
    <extension
@@ -18,15 +18,15 @@
             name="Project Set"
             icon="icons/psf.png"
             category="org.eclipse.pde.PDE"
-            class="org.eclipselabs.team.ui.psf.editor.wizards.ProjectSetImportWizard"
-            id="org.eclipselabs.team.ui.psf.editor.wizards.ProjectSetImportWizard">
+            class="org.eclipselabs.team.psf.editor.wizards.ProjectSetImportWizard"
+            id="org.eclipselabs.team.psf.editor.wizards.ProjectSetImportWizard">
       </wizard>
    </extension>
    <extension
          point="org.eclipse.core.runtime.adapters">
       <factory
             adaptableType="org.eclipselabs.team.psf.model.core.Project"
-            class="org.eclipselabs.team.ui.psf.editor.adapters.ProjectSetAdapterFactory">
+            class="org.eclipselabs.team.psf.editor.adapters.ProjectSetAdapterFactory">
          <adapter
                type="org.eclipse.ui.model.IWorkbenchAdapter">
          </adapter>

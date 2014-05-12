@@ -4,7 +4,7 @@
  * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 
-package org.eclipselabs.team.ui.psf.editor;
+package org.eclipselabs.team.psf.editor;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -40,12 +40,12 @@ import org.eclipse.ui.forms.widgets.ExpandableComposite;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
+import org.eclipselabs.team.psf.editor.adapters.ProjectSetEditorSelectionProvider;
 import org.eclipselabs.team.psf.model.change.service.IContentChangedListener;
 import org.eclipselabs.team.psf.model.change.service.IContentDelta;
 import org.eclipselabs.team.psf.model.core.IProjectSet;
 import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
 import org.eclipselabs.team.psf.model.io.reader.ProjectSetHandler;
-import org.eclipselabs.team.ui.psf.editor.adapters.ProjectSetEditorSelectionProvider;
 
 /**
  * Section for adding and removing projects in Project Set Editor

@@ -1,12 +1,7 @@
 /*******************************************************************************
- * Copyright (c) 2012 Nirmal Sasidharan.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- * Nirmal Sasidharan - initial API and implementation
+ * Copyright (c) 2012 Nirmal Sasidharan. All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 package org.eclipselabs.team.psf.model.core;
 
@@ -27,7 +22,7 @@ public class ProjectSet implements IProjectSet {
 
   /*
    * (non-Javadoc)
-   * @see org.eclipselabs.team.ui.psf.editor.model.IProjectSet#getVersion()
+   * @see org.eclipselabs.team.psf.editor.model.IProjectSet#getVersion()
    */
   @Override
   public String getVersion() {
@@ -36,7 +31,7 @@ public class ProjectSet implements IProjectSet {
 
   /*
    * (non-Javadoc)
-   * @see org.eclipselabs.team.ui.psf.editor.model.IProjectSet#setVersion(java.lang.String)
+   * @see org.eclipselabs.team.psf.editor.model.IProjectSet#setVersion(java.lang.String)
    */
   @Override
   public void setVersion(final String version) {
@@ -45,7 +40,7 @@ public class ProjectSet implements IProjectSet {
 
   /*
    * (non-Javadoc)
-   * @see org.eclipselabs.team.ui.psf.editor.model.IProjectSet#getProviders()
+   * @see org.eclipselabs.team.psf.editor.model.IProjectSet#getProviders()
    */
   @Override
   public Set<IProvider> getProviders() {
@@ -54,7 +49,7 @@ public class ProjectSet implements IProjectSet {
 
   /*
    * (non-Javadoc)
-   * @see org.eclipselabs.team.ui.psf.editor.model.IProjectSet#getProvider(java.lang.String)
+   * @see org.eclipselabs.team.psf.editor.model.IProjectSet#getProvider(java.lang.String)
    */
   @Override
   public IProvider getProvider(final String id) {
@@ -72,7 +67,7 @@ public class ProjectSet implements IProjectSet {
 
   /*
    * (non-Javadoc)
-   * @see org.eclipselabs.team.ui.psf.editor.model.IProjectSet#getWorkingSets()
+   * @see org.eclipselabs.team.psf.editor.model.IProjectSet#getWorkingSets()
    */
   @Override
   public Set<IWorkingSet> getWorkingSets() {

@@ -8,7 +8,7 @@
  * Contributors:
  * Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
-package org.eclipselabs.team.ui.psf.editor.importer;
+package org.eclipselabs.team.psf.editor.importer;
 
 import java.lang.reflect.InvocationTargetException;
 

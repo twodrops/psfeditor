@@ -3,7 +3,7 @@
  * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
-package org.eclipselabs.team.ui.psf.editor;
+package org.eclipselabs.team.psf.editor;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -13,7 +13,7 @@ import org.eclipse.osgi.util.NLS;
 @SuppressWarnings("javadoc")
 public class ProjectSetEditorMessages extends NLS {
 
-  private static final String BUNDLE_NAME = "org.eclipselabs.team.ui.psf.editor.messages"; //$NON-NLS-1$
+  private static final String BUNDLE_NAME = "org.eclipselabs.team.psf.editor.messages"; //$NON-NLS-1$
 
   public static String ProjectSection_AddButton_name;
   public static String ProjectSection_ContentProvider_assertion;

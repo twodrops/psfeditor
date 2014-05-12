@@ -3,7 +3,7 @@
  * available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
-package org.eclipselabs.team.ui.psf.editor.wizards;
+package org.eclipselabs.team.psf.editor.wizards;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -32,7 +32,7 @@ import org.eclipse.ui.IWorkbenchWizard;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.eclipselabs.team.ui.psf.editor.ProjectSetEditorMessages;
+import org.eclipselabs.team.psf.editor.ProjectSetEditorMessages;
 
 /**
  * This is a sample new wizard. Its role is to create a new file resource in the provided container. If the container

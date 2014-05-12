@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipselabs.team.ui.psf.editor.feature"
+      id="org.eclipselabs.team.psf.editor.feature"
       label="ProjectSet Editor"
       version="0.0.4"
       provider-name="Eclipse Labs">
@@ -43,7 +43,7 @@ in a PSF file.
    </requires>
 
    <plugin
-         id="org.eclipselabs.team.ui.psf.editor"
+         id="org.eclipselabs.team.psf.editor"
          download-size="0"
          install-size="0"
          version="0.0.0"

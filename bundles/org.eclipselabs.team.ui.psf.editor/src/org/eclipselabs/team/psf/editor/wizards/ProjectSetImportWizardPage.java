@@ -8,7 +8,7 @@
  * Contributors:
  * Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
-package org.eclipselabs.team.ui.psf.editor.wizards;
+package org.eclipselabs.team.psf.editor.wizards;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;

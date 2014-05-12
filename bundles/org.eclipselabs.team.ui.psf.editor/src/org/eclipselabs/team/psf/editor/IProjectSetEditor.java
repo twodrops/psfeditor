@@ -9,7 +9,7 @@
  * Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 
-package org.eclipselabs.team.ui.psf.editor;
+package org.eclipselabs.team.psf.editor;
 
 import org.eclipse.ui.IEditorPart;
 import org.eclipselabs.team.psf.model.core.IProjectSet;

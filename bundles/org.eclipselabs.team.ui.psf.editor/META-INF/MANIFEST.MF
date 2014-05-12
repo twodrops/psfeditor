@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Project Set Editor
-Bundle-SymbolicName: org.eclipselabs.team.ui.psf.editor;singleton:=true
+Bundle-SymbolicName: org.eclipselabs.team.psf.editor;singleton:=true
 Bundle-Version: 0.0.4
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
  org.eclipse.core.resources;bundle-version="3.7.0",
@@ -13,23 +13,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.7.0",
  org.eclipselabs.team.psf.model.io;bundle-version="0.0.4"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Vendor: Eclipse Labs
-Export-Package: org.eclipselabs.team.ui.psf.editor;
-  uses:="org.eclipse.core.runtime,
-   org.eclipse.ui,
-   org.eclipse.ui.forms,
-   org.eclipse.ui.forms.widgets,
-   org.eclipselabs.team.ui.psf.editor.change.service,
-   org.eclipse.osgi.util,
-   org.eclipse.ui.forms.editor,
-   org.eclipse.jface.viewers,
-   org.eclipse.swt.widgets,
-   org.eclipselabs.team.ui.psf.editor.exceptions,
-   org.eclipselabs.team.ui.psf.editor.core",
- org.eclipselabs.team.ui.psf.editor.adapters;uses:="org.eclipse.core.runtime,org.eclipse.core.resources,org.eclipselabs.team.ui.psf.editor.core",
- org.eclipselabs.team.ui.psf.editor.importer,
- org.eclipselabs.team.ui.psf.editor.wizards;
-  uses:="org.eclipse.jface.wizard,
-   org.eclipse.ui,
-   org.eclipse.jface.viewers,
-   org.eclipse.swt.widgets"
+Export-Package: org.eclipselabs.team.psf.editor,
+ org.eclipselabs.team.psf.editor.adapters,
+ org.eclipselabs.team.psf.editor.importer,
+ org.eclipselabs.team.psf.editor.wizards
 Bundle-ActivationPolicy: lazy

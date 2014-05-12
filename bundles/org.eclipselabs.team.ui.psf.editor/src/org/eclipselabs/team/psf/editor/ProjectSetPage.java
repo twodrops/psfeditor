@@ -4,7 +4,7 @@
  * http://www.eclipse.org/legal/epl-v10.html Contributors: Nirmal Sasidharan - initial API and implementation
  *******************************************************************************/
 
-package org.eclipselabs.team.ui.psf.editor;
+package org.eclipselabs.team.psf.editor;
 
 import org.eclipse.jface.action.ControlContribution;
 import org.eclipse.swt.SWT;
@@ -20,9 +20,9 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipselabs.team.psf.editor.importer.ProjectImporter;
 import org.eclipselabs.team.psf.model.core.IProjectSet;
 import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
-import org.eclipselabs.team.ui.psf.editor.importer.ProjectImporter;
 
 
 /**
