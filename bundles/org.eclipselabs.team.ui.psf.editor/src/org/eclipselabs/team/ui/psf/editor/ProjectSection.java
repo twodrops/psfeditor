@@ -45,6 +45,7 @@ import org.eclipselabs.team.psf.model.change.service.IContentDelta;
 import org.eclipselabs.team.psf.model.core.IProjectSet;
 import org.eclipselabs.team.psf.model.exceptions.ProjectSetException;
 import org.eclipselabs.team.psf.model.io.reader.ProjectSetHandler;
+import org.eclipselabs.team.ui.psf.editor.adapters.ProjectSetEditorSelectionProvider;
 
 /**
  * Section for adding and removing projects in Project Set Editor
@@ -74,6 +75,8 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
    * Button to remove new projects from Project Set
    */
   private Button removeButton;
+
+  private final FormPage page;
 
   /**
    * Content Provider for Project Set
@@ -114,11 +117,13 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
   public ProjectSection(final FormPage page, final Composite parent) {
 
     super(parent, page.getManagedForm().getToolkit(), Section.DESCRIPTION | ExpandableComposite.TITLE_BAR);
+    this.page = page;
     this.projectSetEditor = (ProjectSetEditor) page.getEditor();
 
     ProjectSetHandler.INSTANCE.addContentChangedListener(this);
 
     createClient(getSection(), page.getEditor().getToolkit());
+
 
     setInput();
   }
@@ -183,6 +188,9 @@ public class ProjectSection extends SectionPart implements IContentChangedListen
     this.projectsViewer.setContentProvider(new ProjectSetContentProvider());
     this.projectsViewer.setLabelProvider(new WorkbenchLabelProvider());
     this.projectsViewer.getTable().setData(FormToolkit.KEY_DRAW_BORDER, FormToolkit.TREE_BORDER);
+
+    ProjectSetEditorSelectionProvider selectionProvider = new ProjectSetEditorSelectionProvider(this.projectsViewer);
+    this.page.getSite().setSelectionProvider(selectionProvider);
 
     this.projectsViewer.getTable().addKeyListener(new KeyAdapter() {
 
